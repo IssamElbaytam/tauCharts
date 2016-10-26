@@ -17,7 +17,6 @@ import {Area}       from './elements/element.area';
 import {Path}       from './elements/element.path';
 import {Line}       from './elements/element.line';
 import {Interval}   from './elements/element.interval';
-import {StackedInterval}   from './elements/element.interval.stacked';
 import {ParallelLine}      from './elements/element.parallel.line';
 
 import {IdentityScale}     from './scales/identity';
@@ -178,14 +177,14 @@ Plot.globalSettings = api.globalSettings;
     ['COORDS.MAP', GeoMap],
     ['COORDS.PARALLEL', Parallel],
     ['ELEMENT.GENERIC.CARTESIAN', GenericCartesian],
-    ['ELEMENT.POINT', Point],
+    ['ELEMENT.POINT', Point, 'ELEMENT.GENERIC.CARTESIAN'],
     ['ELEMENT.LINE', Line],
     ['ELEMENT.PATH', Path],
     ['ELEMENT.AREA', Area],
-    ['ELEMENT.INTERVAL', Interval],
-    ['ELEMENT.INTERVAL.STACKED', StackedInterval],
+    ['ELEMENT.INTERVAL', Interval, 'ELEMENT.GENERIC.CARTESIAN'],
+    ['ELEMENT.INTERVAL.STACKED', Interval, 'ELEMENT.GENERIC.CARTESIAN'],
     ['PARALLEL/ELEMENT.LINE', ParallelLine]
-].reduce((memo, nv) => (memo.reg(nv[0], nv[1])), api.unitsRegistry);
+].reduce((memo, nv) => (memo.reg(...nv)), api.unitsRegistry);
 
 [
     [

@@ -1,8 +1,7 @@
-import {Point}      from '../elements/element.point';
 import {Line}       from '../elements/element.line';
 import {Area}       from '../elements/element.area';
-import {Interval}   from '../elements/element.interval';
-import {StackedInterval} from '../elements/element.interval.stacked';
+import {GenericCartesian}   from '../elements/element.generic.cartesian';
+
 var traverseJSON = (srcObject, byProperty, fnSelectorPredicates, funcTransformRules) => {
 
     var rootRef = funcTransformRules(fnSelectorPredicates(srcObject), srcObject);
@@ -259,11 +258,9 @@ var deepClone = (function () {
 
 })();
 var chartElement = [
-    Interval,
-    Point,
+    GenericCartesian,
     Line,
-    Area,
-    StackedInterval
+    Area
 ];
 
 var testColorCode = ((x) => (/^(#|rgb\(|rgba\()/.test(x)));

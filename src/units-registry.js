@@ -9,11 +9,14 @@ var unitsRegistry = {
 
         if (xSeed) {
             SeedsMap[unitType] = xSeed;
-            UnitsMap[unitType] = function (seed) {
-                this.___tauchartsseed___ = seed;
+            UnitsMap[unitType] = function (config, Base) {
+                this.___tauchartsseed___ = new Base(this.setup(config));
             };
             UnitsMap[unitType].prototype = Object.assign(
                 {
+                    setup(config) {
+                        return config;
+                    },
                     node() {
                         return this.___tauchartsseed___;
                     },
@@ -44,8 +47,8 @@ var unitsRegistry = {
         var Unit = this.get(unitType);
         var node;
         if (SeedsMap[unitType]) {
-            var Seed = this.get(SeedsMap[unitType]);
-            node = new Unit(new Seed(unitConfig));
+            var Base = this.get(SeedsMap[unitType]);
+            node = new Unit(unitConfig, Base);
         } else {
             node = new Unit(unitConfig);
         }
